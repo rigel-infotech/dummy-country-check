@@ -54,7 +54,7 @@ export default function PayDemo() {
       }
 
       setLog("Unknown gateway");
-    } catch (e) {
+    } catch (e) { 
       setLog("Error");
     } finally {
       setLoading(false);
@@ -62,12 +62,34 @@ export default function PayDemo() {
   };
 
   return (
-    <main style={{ padding: 24 }}>
-      <h1>US → Stripe, others → Razorpay</h1>
-      <button onClick={pay} disabled={loading}>
-        {loading ? "Processing..." : "Pay now"}
-      </button>
-      {log ? <pre>{log}</pre> : null}
-    </main>
+<main className="p-6 flex flex-col items-start gap-4">
+  <h1 className="text-xl font-semibold">
+    US → Stripe, others → Razorpay
+  </h1>
+
+  <button
+    onClick={pay}
+    disabled={loading}
+    className={`
+      relative px-6 py-3 rounded-lg text-white font-medium
+      bg-blue-600 hover:bg-blue-700 transition-all duration-200
+      disabled:bg-gray-400 disabled:cursor-not-allowed
+      flex items-center gap-2
+    `}
+  >
+    {loading && (
+      <span
+        className="
+          h-4 w-4 border-2 border-white border-t-transparent 
+          rounded-full animate-spin
+        "
+      ></span>
+    )}
+    {loading ? "Processing..." : "Pay now"}
+  </button>
+
+  {log ? <pre className="text-red-600 text-sm">{log}</pre> : null}
+</main>
+
   );
 }
