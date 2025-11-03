@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 
 export default async function Home() {
   const h = await headers();
-  const country = h.get("x-vercel-ip-country") || "IN";
+  const country = h.get("x-vercel-ip-country") || "US";
 
   const currency = country === "IN" ? "INR" : "USD";
   return (
